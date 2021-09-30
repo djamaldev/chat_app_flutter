@@ -1,5 +1,6 @@
 import 'package:chatappv2/screens/auth_screen.dart';
 import 'package:chatappv2/screens/chat_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -45,7 +46,13 @@ class MyApp extends StatelessWidget {
         )
 
       ),
-      home: AuthScreen()//const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(),builder: (ctx, snapShot){
+        if (snapShot.hasData){
+          return ChatScreen();
+        }else {
+          return AuthScreen();
+        }
+      }),
     );
   }
 }

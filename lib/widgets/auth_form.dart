@@ -10,7 +10,7 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLogin = true;
   String _email = "";
   String _password = "";
@@ -39,31 +39,31 @@ class _AuthFormState extends State<AuthForm> {
               children: [
                 TextFormField(
                   key: ValueKey("email"), // each field has a key
-                  validator: (String? val) {
+                  validator: (val) {
                     if (val!.isEmpty || !val.contains("@")) {
                       return "Please enter a valid email adresse!";
                     }
                     return null;
                   },
-                  onSaved: (String? val) => _email = val!,
+                  onSaved: (val) => _email = val!,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(labelText: "Email adresse"),
                 ),
                 if (!_isLogin) //for show user name field on sign up only
                   TextFormField(
                     key: ValueKey("username"),
-                    validator: (String? val) {
+                    validator: (val) {
                       if (val!.isEmpty || val.length < 4) {
                         return "Please enter at least 4 charachters!";
                       }
                       return null;
                     },
-                    onSaved: (String? val) => _userName = val!,
+                    onSaved: (val) => _userName = val!,
                     decoration: InputDecoration(labelText: "User name"),
                   ),
                 TextFormField(
                   key: ValueKey("password"),
-                  validator: (String? val) {
+                  validator: (val) {
                     if (val!.isEmpty || val.length < 7) {
                       return "Please password must contains at least 7 charachters!";
                     }
